@@ -5,33 +5,31 @@
 #                                                     +:+ +:+         +:+      #
 #    By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/02/04 08:22:06 by jergashe          #+#    #+#              #
-#    Updated: 2023/03/02 11:46:17 by jergashe         ###   ########.fr        #
+#    Created: 2023/02/20 08:16:20 by jergashe          #+#    #+#              #
+#    Updated: 2023/03/02 11:38:02 by jergashe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = philo
+NAME = philo_bonus
 CC = cc
 RM = rm -rf
 CFLAGS = -Wall -Wextra -Werror -g
-
 SRC_DIR = src/
 OBJ_DIR = objects/
 
-SRC =	philo \
-    	parse \
+SRC =	philo_bonus \
+    	eat \
+    	getters \
     	init_data \
-    	routine \
-    	time \
-		utils \
     	monitor \
-       	eat_1 \
-    	eat_2 \
+		parse \
+    	print_msg \
+       	routine \
+    	setters \
     	sleep \
     	think \
-    	getters_1 \
-    	getters_2 \
-    	setters
+    	time \
+    	utils
 
 SRCS = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC)))
 
@@ -42,7 +40,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c 
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c $< -o $@
 
@@ -53,5 +51,5 @@ fclean: clean
 	$(RM) $(NAME) 
 
 re: fclean all
-#-g #-fsanitize=thread
+#-g #-fsanitize=thread 
 .PHONY: all clean fclean re
