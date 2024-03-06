@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ielhasso <ielhasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 08:19:00 by jergashe          #+#    #+#             */
-/*   Updated: 2023/02/27 13:30:17 by jergashe         ###   ########.fr       */
+/*   Updated: 2024/03/06 16:05:18 by ielhasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ void	leaks(void)
 {
 	system("leaks philo");
 }
-
-	// atexit(&leaks);
 int	main(int argc, char **argv)
 {
 	if (check_input(argc, argv) != 0)
