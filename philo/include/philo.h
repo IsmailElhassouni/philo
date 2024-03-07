@@ -42,6 +42,7 @@ typedef enum e_philo_state
 }	t_state;
 
 struct	s_data;
+typedef unsigned long long u_int64_t;
 
 typedef struct s_philo
 {

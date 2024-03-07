@@ -35,16 +35,31 @@ int fork_int(t_data *data)
 int get_nb_philos(t_data *data)
 {
     int nb;
-    pthread_mutex_lock(&data->mut_keep_iter);
-    keep = data->keep_iterating;
-    pthread_mutex_unlock(&data->mut_keep_iter);
-    return (keep);
+    pthread_mutex_lock(&data->mut_nb_philos);
+   nb = data->nb_philos;
+    pthread_mutex_unlock(&data->mut_nb_philos);
+    return (nb);
 }
+void *routine(void *philo_p)
+{
+    t_philo *philo;
 
+    philo = (t_philo)
+}
 int thread_runs(t_data *data)
 {
     int i;
     int nb_of_philos;
 
     nb_of_philos = get_nb_philos(data);
+    i =-1;
+    data->start_time = gettime();
+    while(++i < nb_of_philos)
+    {
+        if (pthread_create(&data->philo_ths[i],NULL,&routine,&data->philos[i]))
+            return (-84);
+    }
+    if (pthread_create(&data->monit_all_alive, NULL , &all_alive_routine, data))
+        return (-85);
+   // if (nb_meals_option(&data) == true && pthread_create)
 }

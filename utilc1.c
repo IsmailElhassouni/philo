@@ -71,7 +71,7 @@ int	philo(int ac, char **av)
 {
 	t_data data;
 	
-	if (set_data(arg, av) != 0)
+	if (set_data(&data,ac, av) != 0)
 		return (2);
 	philos_init(&data);
 	fork_int(&data);
