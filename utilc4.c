@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sleep.c                                            :+:      :+:    :+:   */
+/*   utilc4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ielhasso <ielhasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/06 18:26:11 by ielhasso          #+#    #+#             */
-/*   Updated: 2024/03/08 11:25:28 by ielhasso         ###   ########.fr       */
+/*   Created: 2024/03/08 17:33:43 by ielhasso          #+#    #+#             */
+/*   Updated: 2024/03/08 17:37:49 by ielhasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void ft_usleep(uint64_t sleep_time)
+int takeforks(t_philo *philo)
 {
-	u_int64_t start;
-	//need to know how to handle usleep delay in c ?
-	start = gettime();
-	while ((gettime() - start) < sleep_time)
-		usleep(500);
+   if (get_nb_philos(philo->data) == 1)
+        return (handle_1_philo(philo));
+    if (take_right_fork(philo) != 0)
+        return (1);
+    if (take_left_fork(philo) != 0)
+    {
+        drop_right_fork(philo);
+        return (1);
+    }
+    return (0);
 }
-u_int64_t	gettime(void)
-{
-	struct timeval tv;
 
-	if (gettimeofdat(&tv, NULL))
-		return (0);
-	return ((tv.tv_sec * (u_int64_t)1000) + (tv.tv_usec / 1000));
+int eat(t_philo *philo)
+{
+    if (takeforks(philo) != 0)
+        return (1);
 }
