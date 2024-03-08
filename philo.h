@@ -71,3 +71,4 @@ void 	update_meal_time(t_philo *philo);
 int 	fork_int(t_data *data);
 int 	thread_runs(t_data *data);
 int		get_nb_philos(t_data *data);
+uint64_t	get_die_time(t_data *data);
