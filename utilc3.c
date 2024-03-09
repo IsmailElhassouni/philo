@@ -46,6 +46,7 @@ t_state get_state(t_philo *philo)
     pthread_mutex_lock(&philo->mut_state);
     state = philo->state;
     pthread_mutex_unlock(&philo->mut_state);
+    return (state);
 }
 void *routine(void *philo_p)
 {
@@ -82,7 +83,10 @@ int thread_runs(t_data *data)
         if (pthread_create(&data->philo_ths[i],NULL,&routine,&data->philos[i]))
             return (-84);
     }
-   /* if (pthread_create(&data->monit_all_alive, NULL , &all_alive_routine, data))
-        return (-85);*/
-   // if (nb_meals_option(&data) == true && pthread_create)
+    if (pthread_create(&data->monit_all_alive, NULL , &all_alive_routine, data))
+        return (-85);
+   if (nb_meals_option(&data) == 1 
+    && pthread_create(&data->monit_all_full, NULL, &all_full_routine, data))
+        return (-86);
+    return (0);
 }

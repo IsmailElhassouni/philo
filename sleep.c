@@ -28,3 +28,11 @@ u_int64_t	gettime(void)
 		return (0);
 	return ((tv.tv_sec * (u_int64_t)1000) + (tv.tv_usec / 1000));
 }
+int ft_sleep(t_philo *philo)
+{
+	set_philo_state(philo,S);
+	if (get_state(philo) == D)
+		return (1);
+	print_msg(philo->data, philo->id, "is sleeping");
+	ft_usleep(get_sleep_time(philo->data));
+}

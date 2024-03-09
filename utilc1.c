@@ -76,5 +76,7 @@ int	philo(int ac, char **av)
 	philos_init(&data);
 	fork_int(&data);
 	thread_runs(&data);
-	
+	thread_join(&data);
+	free_memory(&data);
+	return (0);
 }

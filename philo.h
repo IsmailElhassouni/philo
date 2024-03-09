@@ -28,6 +28,8 @@ typedef enum e_philo_state
 
 struct	s_data;
 
+typedef unsigned long long u_int64_t;
+typedef unsigned long long uint64_t;
 typedef struct s_philo
 {
 	int				id;
@@ -65,7 +67,6 @@ typedef struct s_data
 	pthread_mutex_t	*forks;
 	t_philo			*philos;
 }					t_data;
-
 long				ft_atoi(const char *str);
 u_int64_t			gettime(void);
 void				update_meal_time(t_philo *philo);
@@ -74,3 +75,15 @@ int					thread_runs(t_data *data);
 int					get_nb_philos(t_data *data);
 uint64_t			get_die_time(t_data *data);
 void				set_philo_state(t_philo *philo, t_state state);
+void 				ft_usleep(uint64_t sleep_time);
+void				update_nb_meals_had(t_philo *philo);
+uint64_t			get_sleep_time(t_data *data);
+t_state 			get_state(t_philo *philo);
+void				*all_alive_routine(void *data_p);
+void 				set_keep(t_data *data, int set_to);
+void 				notify(t_data *data);
+int					nb_meals_option(t_data *data);
+int 				keep(t_data *data);
+void				*all_full_routine(void *data_p);
+int 				threads_join(t_data *data);
+void 				free_memory(t_data *data);

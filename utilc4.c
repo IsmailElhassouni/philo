@@ -63,5 +63,5 @@ int eat(t_philo *philo)
     print_msg(philo->data, philo->id, "is eating");
     update_meal_time(philo);
     sleep_for_eat(philo);
-    
+    update_nb_meal_had(philo);  
 }
