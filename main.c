@@ -6,7 +6,7 @@
 /*   By: ielhasso <ielhasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 12:05:06 by ielhasso          #+#    #+#             */
-/*   Updated: 2024/03/06 18:36:31 by ielhasso         ###   ########.fr       */
+/*   Updated: 2024/03/10 12:40:30 by ielhasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ long	ft_atoi(const char *str)
 
 int	check_num(int ac, char **av)
 {
-	long (t), (i);
+	long(t), (i);
 	i = 1;
 	if (ac == 5)
 	{
@@ -77,11 +77,15 @@ int	check_arg(int ac, char **argv)
 		return (0);
 	return (1);
 }
-
+void leaks()
+{
+	system("leaks a.out");
+}
 int	main(int ac, char **av)
 {
+	atexit(&leaks);
 	if (check_arg(ac, av) == 0)
 		return (printf("\terror\n"));
-	if (philo(av, ac) == 0)
+	if (philo(ac, av) != 0)
 		return (0);
 }

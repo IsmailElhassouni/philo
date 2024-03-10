@@ -6,7 +6,7 @@
 /*   By: ielhasso <ielhasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 14:50:29 by ielhasso          #+#    #+#             */
-/*   Updated: 2024/03/07 12:16:51 by ielhasso         ###   ########.fr       */
+/*   Updated: 2024/03/10 12:30:22 by ielhasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	set_data(t_data *data, int ac, char **av)
 	return (ft_malloc(data));
 }
 
-void	philos_init(t_data *data)
+int	philos_init(t_data *data)
 {
 	t_philo	*philos;
 	int		i;
@@ -64,14 +64,14 @@ void	philos_init(t_data *data)
 		pthread_mutex_init(&philos[i].mut_last_eat_time, NULL);
 		update_meal_time(&philos[i]);
 	}
-	philos = data->philos;
+	return (0);
 }
 
 int	philo(int ac, char **av)
 {
-	t_data data;
-	
-	if (set_data(&data,ac, av) != 0)
+	t_data	data;
+
+	if (set_data(&data, ac, av) != 0)
 		return (2);
 	philos_init(&data);
 	fork_int(&data);
@@ -79,4 +79,13 @@ int	philo(int ac, char **av)
 	thread_join(&data);
 	free_memory(&data);
 	return (0);
+}
+
+uint64_t	get_last_eat_time(t_philo *philo)
+{
+	uint64_t last_eat_time;
+	pthread_mutex_lock(&philo->mut_last_eat_time);
+	last_eat_time = philo->last_eat_time;
+	pthread_mutex_unlock(&philo->mut_last_eat_time);
+	return (last_eat_time);
 }

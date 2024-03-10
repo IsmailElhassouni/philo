@@ -1,9 +1,10 @@
-#include <stdio.h> // printf
-#include <sys/time.h> // time
-#include <stdint.h> // uint64_t
-#include <unistd.h> // usleep
 #include <pthread.h>
+#include <stdint.h> // uint64_t
+#include <stdio.h>  // printf
 #include <stdlib.h>
+#include <sys/time.h> // time
+#include <unistd.h>   // usleep
+
 // typedef struct data_s
 // {
 //     int num;
@@ -63,7 +64,7 @@
 //         exit_on_error(data, 2);
 //     if (pthread_create(&t2, NULL, routine_1, data))
 //         exit_on_error(data, 2);
-    
+
 //     if (pthread_join(t1, NULL))
 //         exit_on_error(data, 3);
 //     if (pthread_join(t2, NULL))
@@ -77,10 +78,5 @@
 // {
 //     example();
 
-
 //     return (0);
 // }
-
-
-
-

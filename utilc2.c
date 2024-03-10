@@ -6,7 +6,7 @@
 /*   By: ielhasso <ielhasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 18:29:55 by ielhasso          #+#    #+#             */
-/*   Updated: 2024/03/06 18:32:53 by ielhasso         ###   ########.fr       */
+/*   Updated: 2024/03/10 12:18:43 by ielhasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,21 @@
 void	update_meal_time(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->mut_last_eat_time);
-	philo->last_eat_time = get_time();
+	philo->last_eat_time = gettime();
 	pthread_mutex_unlock(&philo->mut_last_eat_time);
 }
 
-uint64_t get_sleep_time(t_data *data)
+uint64_t	get_sleep_time(t_data *data)
 {
-	uint64_t sleep_time;
+	uint64_t	sleep_time;
 
 	pthread_mutex_lock(&data->mut_sleep_t);
 	sleep_time = data->sleep_time;
 	pthread_mutex_unlock(&data->mut_sleep_t);
 	return (sleep_time);
 }
-int think(t_philo *philo)
+
+int	think(t_philo *philo)
 {
 	set_philo_state(philo, T);
 	if (get_state(philo) == D)
@@ -36,15 +37,18 @@ int think(t_philo *philo)
 	print_msg(philo->data, philo->id, "is thinking");
 	return (0);
 }
-int keep(t_data *data)
+
+int	keep(t_data *data)
 {
-	int keep;
+	int	keep;
+
 	pthread_mutex_lock(&data->mut_keep_iter);
 	keep = data->keep_iterating;
 	pthread_mutex_unlock(&data->mut_keep_iter);
 	return (keep);
 }
-void *all_alive_routine(void *d)
+
+void	*all_alive_routine(void *d)
 {
 	int i;
 	int nb_philos;
@@ -63,7 +67,7 @@ void *all_alive_routine(void *d)
 			set_philo_state(&philos[i], D);
 			set_keep(data, 0);
 			notify(data);
-			break;
+			break ;
 		}
 		i++;
 		if (i == nb_philos)
@@ -71,5 +75,4 @@ void *all_alive_routine(void *d)
 		usleep(1000);
 	}
 	return (NULL);
-	
 }
